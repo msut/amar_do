@@ -23,9 +23,13 @@ def sequence_files(src, dest):
     new_names = {}
     for series, _ in dd.items():
         #print('series {} size: {}'.format(series, len(dd[series])))
+        # dictionaries don't maintain sorted order, so sort the keys and access them in order.
+        keys = list(dd[series].keys())
+        keys.sort()
+        #print(keys)
         curr_int = 0
-        for kk in dd[series]:
-            file = dd[series][kk]
+        for key in keys:
+            file = dd[series][key]
             #print('{} -> {}'.format(file, replace_int(file, curr_int)))
             new_names[file] = replace_int(file, curr_int)
             curr_int = curr_int + 1
